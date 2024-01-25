@@ -39,4 +39,9 @@ public class CarAdvertService {
     {
        return repository.updateCarAdvert(modifiedCarAdvert);
     }
+
+    public void deleteCarAdvert(Long id)
+    {
+        repository.deleteCarAdvertById(id);
+    }
 }

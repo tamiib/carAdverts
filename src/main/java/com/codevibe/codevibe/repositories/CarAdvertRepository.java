@@ -42,6 +42,7 @@ public class CarAdvertRepository {
             advert2.setPrice(250);
         }
 
+        //prije vracanja dodati filtriranje po fileName
         return allCarAdverts;
     }
 
@@ -70,6 +71,20 @@ public class CarAdvertRepository {
         carAdvert.setMileage(modifiedAdvert.getMileage());
 
         return getCarAdvertById(modifiedAdvert.getId());
+    }
+
+    public void deleteCarAdvertById(Long id)
+    {
+        CarAdvert carAdvertForDelete=getCarAdvertById(id);
+        if(carAdvertForDelete!=null)
+        {
+            int index=getAllCarAdverts("id").indexOf(carAdvertForDelete);
+            if(index!=-1)
+            {
+                getAllCarAdverts("id").remove(index);
+            }
+        }
+
     }
     
 }
