@@ -1,14 +1,16 @@
 package com.codevibe.codevibe.repositories;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
+import com.codevibe.codevibe.domainModels.CarAdvert;
 import com.codevibe.codevibe.enums.FuelType;
-import com.codevibe.codevibe.models.CarAdvert;
 
 @Repository
 public class CarAdvertRepository {
@@ -16,7 +18,6 @@ public class CarAdvertRepository {
     List<CarAdvert> allCarAdverts;
     public List<CarAdvert> getAllCarAdverts(String filedName)
     {
-        //dohvatiti podatke;
         if(allCarAdverts==null)
         {
             allCarAdverts=new ArrayList<>();
@@ -27,7 +28,7 @@ public class CarAdvertRepository {
             advert1.setIsNew(false);
             advert1.setFirstRegistration(new Date());
             advert1.setMileage(1200);
-            advert1.setPrice(100);
+            advert1.setPrice(1000);
             allCarAdverts.add(advert1);
     
     
@@ -42,16 +43,14 @@ public class CarAdvertRepository {
             advert2.setPrice(250);
         }
 
-        //prije vracanja dodati filtriranje po fileName
         return allCarAdverts;
     }
 
+
     public CarAdvert getCarAdvertById(Long id)
     {
-        Optional<CarAdvert> optionalCarAdvert = getAllCarAdverts("id").stream()
-        .filter(objekt -> objekt.getId() == id)
-        .findFirst();
-        return optionalCarAdvert.orElse(null);
+        Optional<CarAdvert> optionalCarAdvert = getAllCarAdverts("id").stream().filter(objekt -> objekt.getId() == id).findFirst();
+        return optionalCarAdvert.isPresent() ? optionalCarAdvert.get() : null;
     }
 
     public CarAdvert createCarAdvert(CarAdvert carAdvert)
