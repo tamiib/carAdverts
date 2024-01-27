@@ -3,30 +3,32 @@ package com.codevibe.codevibe.dto;
 import java.util.Date;
 
 import com.codevibe.codevibe.enums.FuelType;
+import com.codevibe.codevibe.serializers.CarAdvertDtoSerializer;
+import com.codevibe.codevibe.validators.CarAdvertConstraint;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
+@CarAdvertConstraint
+@JsonSerialize(using = CarAdvertDtoSerializer.class)
 public class CarAdvertDto 
 {
     @NotNull(message = "Id can not be null")
     @Positive(message = "Id must be a positive number")
     private Long id;
 
-    @NotNull(message = "Title can not be null")
     private String title;
-
-    @NotNull(message = "Title can not be null")
     private FuelType fuelType;
 
-    @NotNull(message = "Id can not be null")
-    @Positive(message = "Id can not me negative")
+    @Min(value = 0, message = "Price cannot be negative")
     private Integer price;
 
-    @NotNull(message = "Id can not be null")
     private Boolean isNew;
 
+    @Min(value = 0, message = "Mileage must be non-negative")
     private Integer mileage;
     
     @JsonFormat(pattern = "yyyy-MM-dd")

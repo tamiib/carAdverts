@@ -1,7 +1,5 @@
 package com.codevibe.codevibe.services;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +26,8 @@ public class CarAdvertService {
     public List<CarAdvertDto> getAllCarAdverts(String filedName)
     {
         List<CarAdvertDto> allCarAdverts=converter.convertDomainCarAdvertListToDtoCarAdvertList(repository.getAllCarAdverts(filedName));
-        Comparator<CarAdvertDto> comparator = converter.getComparatorForAttribute(filedName);
-        Collections.sort(allCarAdverts, comparator);
+        //Comparator<CarAdvertDto> comparator = converter.getComparatorForAttribute(filedName);
+        //Collections.sort(allCarAdverts, comparator);
          return allCarAdverts;
     }
 
@@ -43,9 +41,9 @@ public class CarAdvertService {
        return converter.convertDomainCarAdvertToDtoCarAdvert(repository.createCarAdvert(converter.convertDtoCarAdvertToDomainCarAdvert(carAdvertDto)));
     }
 
-    public CarAdvertDto updateCarAdvert(CarAdvertDto modifiedCarAdvertDto)
+    public CarAdvertDto updateCarAdvert(Long id,CarAdvertDto modifiedCarAdvertDto)
     {
-       return converter.convertDomainCarAdvertToDtoCarAdvert(repository.updateCarAdvert(converter.convertDtoCarAdvertToDomainCarAdvert(modifiedCarAdvertDto)));
+       return converter.convertDomainCarAdvertToDtoCarAdvert(repository.updateCarAdvert(id,converter.convertDtoCarAdvertToDomainCarAdvert(modifiedCarAdvertDto)));
     }
 
     public void deleteCarAdvert(Long id)

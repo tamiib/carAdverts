@@ -18,8 +18,10 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	implementation("jakarta.validation:jakarta.validation-api:3.0.1")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
+	implementation ("org.springframework.boot:spring-boot-starter-jdbc")
+	implementation ("org.springframework.boot:spring-boot-starter-validation")
+	runtimeOnly ("org.postgresql:postgresql")
 }
 
 tasks.withType<Test> {
