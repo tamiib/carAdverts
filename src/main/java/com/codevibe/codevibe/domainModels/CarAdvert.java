@@ -69,7 +69,5 @@ public class CarAdvert {
     public void setFirstRegistration(Date firstRegistration) {
         this.firstRegistration = firstRegistration;
     }
-
-
     
 }

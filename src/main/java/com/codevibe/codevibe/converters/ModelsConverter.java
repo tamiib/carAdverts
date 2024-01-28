@@ -81,7 +81,7 @@ public class ModelsConverter
             case "mileage" -> Comparator.comparing(CarAdvertDto::getMileage);
             case "firstRegistration" -> Comparator.comparing(CarAdvertDto::getFirstRegistration);
           
-            default -> throw new IllegalArgumentException("Nepodržani atribut za sortiranje: " + sortBy);
+            default -> throw new IllegalArgumentException("Unsupported sortBy param: " + sortBy);
         };
     }
 

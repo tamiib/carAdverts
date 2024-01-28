@@ -26,6 +26,7 @@ public class CarAdvertDto
     @Min(value = 0, message = "Price cannot be negative")
     private Integer price;
 
+    @NotNull(message = "IsNew can not be null")
     private Boolean isNew;
 
     @Min(value = 0, message = "Mileage must be non-negative")

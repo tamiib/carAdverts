@@ -1,12 +1,15 @@
 package com.codevibe.codevibe.repositories;
 
 
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.codevibe.codevibe.domainModels.CarAdvert;
@@ -70,16 +73,26 @@ public class CarAdvertRepository
     {
         String sql = "INSERT INTO car_advert (title, fuel_type, price, is_new, mileage, first_registration) " +
                      "VALUES (?, ?, ?, ?, ?, ?)";
+         KeyHolder keyHolder = new GeneratedKeyHolder();            
 
-        jdbcTemplate.update(sql, 
-                newAdvert.getTitle(),
-                newAdvert.getFuelType().toString(), 
-                newAdvert.getPrice(),
-                newAdvert.getIsNew(),
-                newAdvert.getMileage(),
-                newAdvert.getFirstRegistration());
-
-         return  getCarAdvertById(newAdvert.getId());      
+                     jdbcTemplate.update(
+        connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, new String[] {"id"});
+            ps.setString(1, newAdvert.getTitle());
+            ps.setString(2, newAdvert.getFuelType().toString());
+            ps.setInt(3, newAdvert.getPrice());
+            ps.setBoolean(4, newAdvert.getIsNew());
+            ps.setInt(5, newAdvert.getMileage());
+            ps.setTimestamp(6, new java.sql.Timestamp(newAdvert.getFirstRegistration().getTime())); 
+            return ps;
+        },
+        keyHolder);
+       
+        Number key = keyHolder.getKey();
+        if (key != null) {
+            return getCarAdvertById(key.longValue());
+        } 
+        return null;  
     }
 
     public CarAdvert updateCarAdvert(Long id, CarAdvert updatedAdvert)

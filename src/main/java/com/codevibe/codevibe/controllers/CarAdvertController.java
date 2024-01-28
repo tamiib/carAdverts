@@ -103,7 +103,7 @@ public class CarAdvertController
         
     }
 
-     @PutMapping("car/adverts/{id}")
+    @PutMapping("car/adverts/{id}")
     public ResponseEntity<?> updateCarAdvert(@PathVariable(name = "id") Long id, @Valid @RequestBody CarAdvertDto updatedAdvertDto) 
     {
         CarAdvertDto existingCarAdvert = carAdvertService.getCarAdvertById(id);
@@ -145,8 +145,5 @@ public class CarAdvertController
     });
     return errors;
 }
-
-
-
 
 }
