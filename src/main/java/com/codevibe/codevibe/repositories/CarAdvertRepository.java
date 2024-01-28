@@ -73,23 +73,38 @@ public class CarAdvertRepository
     {
         String sql = "INSERT INTO car_advert (title, fuel_type, price, is_new, mileage, first_registration) " +
                      "VALUES (?, ?, ?, ?, ?, ?)";
-         KeyHolder keyHolder = new GeneratedKeyHolder();            
+        KeyHolder keyHolder = new GeneratedKeyHolder();            
 
-                     jdbcTemplate.update(
-        connection -> {
-            PreparedStatement ps = connection.prepareStatement(sql, new String[] {"id"});
+        jdbcTemplate.update( connection -> {PreparedStatement ps = connection.prepareStatement(sql, new String[] {"id"});
             ps.setString(1, newAdvert.getTitle());
-            ps.setString(2, newAdvert.getFuelType().toString());
-            ps.setInt(3, newAdvert.getPrice());
+            if(newAdvert.getFuelType() != null)
+            {
+                ps.setString(2, newAdvert.getFuelType().toString());
+            }
+            else 
+            {
+                ps.setNull(2, java.sql.Types.VARCHAR);
+            }
+
+            ps.setInt(3, newAdvert.getPrice()!=null ? newAdvert.getPrice():0);
             ps.setBoolean(4, newAdvert.getIsNew());
-            ps.setInt(5, newAdvert.getMileage());
-            ps.setTimestamp(6, new java.sql.Timestamp(newAdvert.getFirstRegistration().getTime())); 
-            return ps;
+            ps.setInt(5, newAdvert.getMileage()!=null ? newAdvert.getMileage():0);
+           
+            if(newAdvert.getFirstRegistration() != null) 
+            {
+             ps.setTimestamp(6, new java.sql.Timestamp(newAdvert.getFirstRegistration().getTime()));
+            } 
+            else 
+            {
+                ps.setNull(6, java.sql.Types.TIMESTAMP);
+            }
+                return ps;
         },
         keyHolder);
        
         Number key = keyHolder.getKey();
-        if (key != null) {
+        if(key != null) 
+        {
             return getCarAdvertById(key.longValue());
         } 
         return null;  
@@ -100,7 +115,7 @@ public class CarAdvertRepository
         String sql = "UPDATE car_advert SET title = ?, fuel_type = ?, price = ?, is_new = ?, mileage = ?, first_registration = ? WHERE id = ?";
         jdbcTemplate.update(sql,
                 updatedAdvert.getTitle(),
-                updatedAdvert.getFuelType().toString(),
+                updatedAdvert.getFuelType()!=null ? updatedAdvert.getFuelType().toString():null,
                 updatedAdvert.getPrice(),
                 updatedAdvert.getIsNew(),
                 updatedAdvert.getMileage(),
