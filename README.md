@@ -46,3 +46,7 @@ Running the Project Locally:
                    -select 'Spring Boot Application' from the dropdown.
                    -click the 'Run' button.
    -Using Terminal: - run the application by executing command in the terminal: ./gradlew bootRun
+
+6. Open brawser and go to http://localhost:8080/swagger-ui/index.html#/
+   -username:codevibe
+   -password:tami
