@@ -26,8 +26,6 @@ public class CarAdvertService {
     public List<CarAdvertDto> getAllCarAdverts(String filedName)
     {
         List<CarAdvertDto> allCarAdverts=converter.convertDomainCarAdvertListToDtoCarAdvertList(repository.getAllCarAdverts(filedName));
-        //Comparator<CarAdvertDto> comparator = converter.getComparatorForAttribute(filedName);
-        //Collections.sort(allCarAdverts, comparator);
          return allCarAdverts;
     }
 

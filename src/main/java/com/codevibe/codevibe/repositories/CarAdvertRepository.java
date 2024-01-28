@@ -27,18 +27,18 @@ public class CarAdvertRepository
 
     @PostConstruct
     private void initializeDatabase() {
-        checkAndCreateTable(); // Onda kreiramo tabelu sa novom strukturom
+        checkAndCreateTable(); 
     }
     
     private void checkAndCreateTable() {
         String sqlCreate = "CREATE TABLE IF NOT EXISTS car_advert " +
             "(id SERIAL PRIMARY KEY, " +
             "title VARCHAR(255), " +
-            "fuel_type VARCHAR(50), " + // Preimenovano da odgovara SQL konvencijama
+            "fuel_type VARCHAR(50), " + 
             "price INTEGER, " +
             "is_new BOOLEAN, " +
             "mileage INTEGER, " +
-            "first_registration DATE)"; // Preimenovano da odgovara SQL konvencijama
+            "first_registration DATE)"; 
     
         jdbcTemplate.execute(sqlCreate);
     }

@@ -38,14 +38,6 @@ public class CarAdvertController
     }
     
 
-    private String testString="ovo je testni string";
-
-    @GetMapping("/test")
-public String test() {
-    return testString;
-}
-
-//mozda napraviti objekt za errore ?
     @GetMapping("/car/adverts")
     public ResponseEntity<?> getAllAdverts(@RequestParam(required = false, defaultValue = "id",name ="sortBy") String sortBy)
     {
@@ -88,7 +80,6 @@ public String test() {
        
     }
 
-    //ovdje heldnat eror 400 bag request
   @PostMapping("car/advert")
     public ResponseEntity<?> createCarAdvert(@Valid @RequestBody CarAdvertDto newDtoCarAdvert)
      {
@@ -105,7 +96,6 @@ public String test() {
             }
           
         }
-        //provjeriti kako bad request hendlati
         catch (JsonParseException e)
         {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ddd");

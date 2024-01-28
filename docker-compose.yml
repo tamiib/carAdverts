@@ -1,15 +1,5 @@
 version: '3.8'
 services:
-  app:
-    build: .
-    ports:
-      - "8080:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/caradvertdb
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: admin
-    depends_on:
-      - db
   db:
     image: postgres:latest
     environment:

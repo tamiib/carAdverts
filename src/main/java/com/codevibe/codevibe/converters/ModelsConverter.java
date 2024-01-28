@@ -36,7 +36,6 @@ public class ModelsConverter
     
             if(domainCarAdvert.getMileage()!=null)
             {
-                //format provjerit
                 dtoCarAdvert.setMileage(domainCarAdvert.getMileage());
             }
         }
