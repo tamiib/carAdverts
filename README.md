@@ -48,5 +48,5 @@ Running the Project Locally:
    -Using Terminal: - run the application by executing command in the terminal: ./gradlew bootRun
 
 6. Open brawser and go to http://localhost:8080/swagger-ui/index.html#/
-   -username:codevibe
+   -username:tamara
    -password:tami
