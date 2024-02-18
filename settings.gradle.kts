@@ -1,1 +1,1 @@
-rootProject.name = "codevibe"
+rootProject.name = "carAdverts"
